@@ -7,11 +7,9 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
-app.use(cors);
+app.use(cors());
 app.use(express.json());
 
-// const uri =
-//   "mongodb+srv://productFlow:GDdRBeygXq27y46A@cluster0.ddlv3rx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ddlv3rx.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -27,6 +25,16 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+
+    const productFlowCollection = client
+      .db("dbProductFlow")
+      .collection("dbFoods");
+
+    app.get("/foods", async (req, res) => {
+      const cursor = productFlowCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
@@ -44,5 +52,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`product flow start a port ${port}`);
+  console.log(`product flow start a port on ${port}`);
 });
