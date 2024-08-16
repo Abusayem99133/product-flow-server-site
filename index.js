@@ -28,12 +28,55 @@ async function run() {
 
     const productFlowCollection = client
       .db("dbProductFlow")
-      .collection("dbFoods");
+      .collection("dbBooks");
 
-    app.get("/foods", async (req, res) => {
-      const cursor = productFlowCollection.find();
-      const result = await cursor.toArray();
+    app.get("/books", async (req, res) => {
+      const result = await productFlowCollection.find().toArray();
       res.send(result);
+    });
+    // app.get("/bookApi", async (req, res) => {
+    //   const { page = 1, limit = 10 } = req.query;
+
+    //   try {
+    //     const books = await productFlowCollection
+    //       .find({})
+    //       .skip((page - 1) * limit) // Skip the documents from previous pages
+    //       .limit(parseInt(limit)) // Limit the number of documents returned
+    //       .toArray();
+
+    //     const count = await productFlowCollection.countDocuments();
+
+    //     res.json({
+    //       books,
+    //       totalPages: Math.ceil(count / limit),
+    //       currentPage: parseInt(page),
+    //     });
+    //   } catch (err) {
+    //     console.error(err.message);
+    //     res.status(500).send("Server Error");
+    //   }
+    // });
+    app.get("/api/books", async (req, res) => {
+      const { page = 1, limit = 9 } = req.query;
+
+      try {
+        const books = await productFlowCollection
+          .find({})
+          .skip((page - 1) * limit)
+          .limit(parseInt(limit))
+          .toArray();
+
+        const count = await productFlowCollection.countDocuments();
+
+        res.json({
+          books,
+          totalPages: Math.ceil(count / limit),
+          currentPage: parseInt(page),
+        });
+      } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+      }
     });
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
