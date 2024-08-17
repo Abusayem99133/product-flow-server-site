@@ -4,7 +4,7 @@ const { MongoClient, ServerApiVersion } = require("mongodb");
 require("dotenv").config();
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // middleware
 app.use(cors());
@@ -30,95 +30,6 @@ async function run() {
       .db("dbProductFlow")
       .collection("dbBooks");
 
-    // app.get("/books", async (req, res) => {
-    //   const result = await productFlowCollection.find().toArray();
-    //   res.send(result);
-    // });
-    // app.get("/bookApi", async (req, res) => {
-    //   const { page = 1, limit = 10 } = req.query;
-
-    //   try {
-    //     const books = await productFlowCollection
-    //       .find({})
-    //       .skip((page - 1) * limit) // Skip the documents from previous pages
-    //       .limit(parseInt(limit)) // Limit the number of documents returned
-    //       .toArray();
-
-    //     const count = await productFlowCollection.countDocuments();
-
-    //     res.json({
-    //       books,
-    //       totalPages: Math.ceil(count / limit),
-    //       currentPage: parseInt(page),
-    //     });
-    //   } catch (err) {
-    //     console.error(err.message);
-    //     res.status(500).send("Server Error");
-    //   }
-    // });
-    // app.get("/api/books", async (req, res) => {
-    //   const { page = 1, limit = 9 } = req.query;
-
-    //   try {
-    //     const books = await productFlowCollection
-    //       .find({})
-    //       .skip((page - 1) * limit)
-    //       .limit(parseInt(limit))
-    //       .toArray();
-
-    //     const count = await productFlowCollection.countDocuments();
-
-    //     res.json({
-    //       books,
-    //       totalPages: Math.ceil(count / limit),
-    //       currentPage: parseInt(page),
-    //     });
-    //   } catch (err) {
-    //     console.error(err.message);
-    //     res.status(500).send("Server Error");
-    //   }
-    // });
-    // app.get("/books", async (req, res) => {
-    //   const { search, brand, category, minPrice, maxPrice, sortBy } = req.query;
-
-    //   try {
-    //     // Build the query object
-    //     let query = {};
-
-    //     if (search) {
-    //       query.productName = { $regex: search, $options: "i" }; // Case-insensitive search
-    //     }
-
-    //     if (brand) {
-    //       query.brandName = brand;
-    //     }
-
-    //     if (category) {
-    //       query.categoryName = category;
-    //     }
-
-    //     if (minPrice || maxPrice) {
-    //       query.price = {};
-    //       if (minPrice) query.price.$gte = Number(minPrice);
-    //       if (maxPrice) query.price.$lte = Number(maxPrice);
-    //     }
-
-    //     // Build the sorting object
-    //     let sort = {};
-    //     if (sortBy === "priceLowToHigh") {
-    //       sort.price = 1;
-    //     } else if (sortBy === "priceHighToLow") {
-    //       sort.price = -1;
-    //     } else if (sortBy === "newestFirst") {
-    //       sort.createdAt = -1;
-    //     }
-
-    //     const products = await products.find(query).sort(sort);
-    //     res.json(products);
-    //   } catch (error) {
-    //     res.status(500).json({ message: error.message });
-    //   }
-    // });
     app.get("/api/books", async (req, res) => {
       const {
         page = 1,
