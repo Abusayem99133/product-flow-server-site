@@ -18,8 +18,9 @@
 <li>Node.js</li>
 <li>npm</li>
 <li>MongoDB (running or using a cloud service like MongoDB Atlas)</li>
-
-<h2></h2>
+<hr/>
+<h2>Installation</h2>
+<p></p>
 <li></li>
 <h2></h2>
 <p></p>
