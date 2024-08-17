@@ -9,7 +9,7 @@
 <h2>Technologies Used</h2>
 <li>Node.js</li>
 <li>Express.js</li>
-<li>MOngoDB</li>
+<li>MongoDB</li>
 <li>dotenv for environment variables</li>
 <hr/>
 <h2>Project Setup</h2>
