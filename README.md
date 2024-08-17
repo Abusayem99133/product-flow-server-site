@@ -18,3 +18,22 @@
 <li>Node.js</li>
 <li>npm</li>
 <li>MongoDB (running or using a cloud service like MongoDB Atlas)</li>
+<hr/>
+<h2>Installation</h2>
+<p>1. Clone the Repository</p>
+<p>git clone https://github.com/Abusayem99133/product-flow-server-site</p>
+
+<li>cd product-flow</li>
+<hr/>
+<h2>Install Dependencies</h2>
+<li>npm install</li>
+<hr/>
+<h2>Environment Variables</h2>
+<li>Create a .env file in the root directory.</li>
+<li>Add the necessary environment variables</li>
+<hr/>
+<h2>Run the Server</h2>
+<li>npm start</li>
+<hr/>
+<h2>Deployment</h2>
+<li>Deploy the backend server ot a cloud service(vercel)</li>
